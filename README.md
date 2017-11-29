@@ -4,23 +4,26 @@
 root:/saltedfish/api
 
 ## API示例
+
 url:/message
-POST
-| key           | value_type    |
+
+method:POST
+
+| key | value_type |
 
 | :-----------: |:-------------:|
 
-| nickName      | String        |
+| nickName  | String |
 
-| content       | String        |
+| content    | String |
 
-| diskLikeNum   | int           |
+| diskLikeNum  | int |
 
-| likeNum       | int           |
+| likeNum   | int |
 
 返回json示例
-
-'{
+```json
+{
     "code": 0,
     "msg": "成功",
     "data": {
@@ -30,4 +33,5 @@ POST
         "likeNum": 99,
         "disLikeNum": null
     }
-}'
+}
+```
