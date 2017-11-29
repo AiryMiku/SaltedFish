@@ -1,14 +1,14 @@
 # SaltedFish
 ## 咸鱼服务端 Springboot,Jpa
 
+root:/saltedfish/api
 
 ## API示例
-# /saltedfish/api/message
-## POST
-
+url:/message
+POST
 | key           | value_type    |
 
-| ------------- |:-------------:|
+| :-----------: |:-------------:|
 
 | nickName      | String        |
 
@@ -18,7 +18,8 @@
 
 | likeNum       | int           |
 
-### 返回json示例
+返回json示例
+
 '{
     "code": 0,
     "msg": "成功",
