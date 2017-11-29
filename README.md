@@ -11,7 +11,7 @@ method:POST
 
 | key | value_type |
 
-| :-------: |:-----:|
+| -------- |------:|
 
 | nickName  | String |
 
