@@ -11,15 +11,15 @@ method:POST
 
 | key | value_type |
 
-| :-----------: |:-------------:|
+| :-------: |:-----:|
 
 | nickName  | String |
 
-| content    | String |
+| content    | String|
 
-| diskLikeNum  | int |
+| diskLikeNum| int |
 
-| likeNum   | int |
+| likeNum    | int |
 
 返回json示例
 ```json
