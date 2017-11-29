@@ -9,17 +9,12 @@ url:/message
 
 method:POST
 
-| key | value_type |
-
-| -------- | ------ |
-
-| nickName  | String |
-
-| content    | String|
-
-| diskLikeNum| int |
-
-| likeNum    | int |
+| key        | value_type |
+| ---------- | ---------- |
+| nickName   | String     |
+| content    | String     |
+| diskLikeNum| int        |
+| likeNum    | int        |
 
 返回json示例
 ```json
