@@ -12,7 +12,7 @@ public class ResultUtil {
     public static Result success(Object o){
         Result result = new Result();
         result.setCode(0);
-        result.setMsg("成功");
+        result.setMsg("success");
         result.setData(o);
         return result;
     }

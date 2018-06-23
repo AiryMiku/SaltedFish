@@ -3,7 +3,6 @@ package com.airy.saltedfish.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.DateTimeException;
 import java.util.Date;
 
 /**
@@ -17,7 +16,7 @@ public class Comment {
     private Integer id;
 
     private String nickName;
-    private String Cotent;
+    private String content;
     private Date date;
 
     public Integer getId() {
@@ -36,12 +35,12 @@ public class Comment {
         this.nickName = nickName;
     }
 
-    public String getCotent() {
-        return Cotent;
+    public String getContent() {
+        return content;
     }
 
-    public void setCotent(String cotent) {
-        Cotent = cotent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getDate() {
@@ -57,7 +56,7 @@ public class Comment {
         return "Comment{" +
                 "id=" + id +
                 ", nickName='" + nickName + '\'' +
-                ", Cotent='" + Cotent + '\'' +
+                ", content='" + content + '\'' +
                 ", date=" + date +
                 '}';
     }

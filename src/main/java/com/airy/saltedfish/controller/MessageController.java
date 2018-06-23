@@ -15,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,16 +52,16 @@ public class MessageController {
      * @return
      */
     @PostMapping(value = "/message")
-    public Result<Message> addMessage(@Valid Message message,
-                                      BindingResult bindingResult){
+    public Result addMessage(@Valid Message message,
+                             BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
 
         message.setNickName(message.getNickName());
         message.setContent(message.getContent());
-        message.setDisLikeNum(0);
-        message.setLikeNum(0);
+        message.setDisLikeNum(message.getDisLikeNum());
+        message.setLikeNum(message.getLikeNum());
 
         return ResultUtil.success(messageRepository.save(message));
     }
@@ -74,21 +73,20 @@ public class MessageController {
      * @return
      */
     @GetMapping(value = "/message/{id}")
-    public Result<Message> messageFindById(@PathVariable("id") Integer id,
-                                           BindingResult bindingResult) {
-
-//        List list = messageRepository.findAllById(id);
-//        if (list != null){
-//            return ResultUtil.success(list);
-//        } else {
-//            return ResultUtil.error(1,"")
-//        }
+    public Result messageFindById(@PathVariable("id") Integer id,
+                                  BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
-        } else {
-            return ResultUtil.success(messageRepository.findAllById(id));
         }
+
+        List list = messageRepository.findAllById(id);
+        if (list != null){
+            return ResultUtil.success(list);
+        } else {
+            return ResultUtil.error(1,"Unknow error");
+        }
+
     }
 
     /**
@@ -99,15 +97,15 @@ public class MessageController {
      * @return
      */
     @PostMapping(value = "message/{id}/comment")
-    public Result<Message> addOneCommentToMessage(@PathVariable("id") Integer id,
-                                                  @RequestParam("nickName") String nickName,
-                                                  @RequestParam("content") String content){
+    public Result addOneCommentToMessage(@PathVariable("id") Integer id,
+                                         @RequestParam("nickName") String nickName,
+                                         @RequestParam("content") String content){
 
 
             Message message = messageService.findOneById(id);
             Comment comment = new Comment();
             comment.setNickName(nickName);
-            comment.setCotent(content);
+            comment.setContent(content);
             comment.setDate(DateUtil.getDate());
             message.addComment(comment);
             commentRepository.save(comment);
