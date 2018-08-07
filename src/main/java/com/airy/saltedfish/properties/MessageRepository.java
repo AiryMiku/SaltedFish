@@ -1,6 +1,7 @@
 package com.airy.saltedfish.properties;
 
 import com.airy.saltedfish.domain.Message;
+import com.airy.saltedfish.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface MessageRepository extends JpaRepository<Message,Integer> {
       * @param id
      * @return
      */
-    List<Message> findAllById(Integer id);
+    Message findById(Integer id);
+
+    List<Message> findAllByUser(Integer id);
 
 }

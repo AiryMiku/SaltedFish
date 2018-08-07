@@ -17,6 +17,6 @@ public interface CommentRepository extends JpaRepository<Comment,Integer>{
      * @param id
      * @return
      */
-    List<Comment> findAllById(Integer id);
+    Comment findById(Integer id);
 
 }

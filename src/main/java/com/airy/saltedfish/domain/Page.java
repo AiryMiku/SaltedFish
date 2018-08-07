@@ -1,46 +1,45 @@
 package com.airy.saltedfish.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * Created by Airy on 2017/11/13
+ * Created by Airy on 2018/6/28
  */
-
 @Entity
-public class Message {
-
+public class Page {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer Id;
 
     @OneToOne
     @JoinColumn(name = "userId")
     private User user;
 
-    @NotBlank(message = "必传")
     private String content;
 
-    private Integer likeNum;
-    private Integer disLikeNum;
+//    private List<Image> niceImage;
 
     @OneToMany
     @JoinColumn(name = "messageId")
     private Set<Comment> comments = new HashSet<>();
 
-    public Message(){}
+    @OneToOne
+    @JoinColumn(name = "blockId")
+    private Block block;
+
+    private String publishDate;
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        Id = id;
     }
-
 
     public String getContent() {
         return content;
@@ -50,24 +49,20 @@ public class Message {
         this.content = content;
     }
 
-    public Integer getLikeNum() {
-        return likeNum;
+    public Block getBlock() {
+        return block;
     }
 
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
+    public void setBlock(Block block) {
+        this.block = block;
     }
 
-    public Integer getDisLikeNum() {
-        return disLikeNum;
+    public String getPublishDate() {
+        return publishDate;
     }
 
-    public void setDisLikeNum(Integer disLikeNum) {
-        this.disLikeNum = disLikeNum;
-    }
-
-    public void addComment(Comment comment){
-        comments.add(comment);
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
     public Set<Comment> getComments() {
@@ -78,6 +73,10 @@ public class Message {
         this.comments = comments;
     }
 
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
+
     public User getUser() {
         return user;
     }
@@ -85,4 +84,5 @@ public class Message {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

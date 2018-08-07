@@ -1,21 +1,19 @@
 package com.airy.saltedfish.service;
 
 import com.airy.saltedfish.domain.Message;
-import com.airy.saltedfish.properties.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
- * Created by Airy on 2017/11/15
+ * Created by Airy on 2018/8/7
  */
-@Service
-public class MessageService {
 
-    @Autowired
-    private MessageRepository messageRepository;
+public interface MessageService {
 
-    public Message findOneById(Integer id) {
-        return messageRepository.findOne(id);
-    }
-
+    List<Message> findAll();
+    List<Message> findAllByUid(Integer uid);
+    Message findById(Integer id);
+    Message add(Message message);
+    void delete(Integer id);
+    Message update(Message message);
 }

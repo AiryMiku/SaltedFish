@@ -1,5 +1,13 @@
 # SaltedFish
-## 咸鱼服务端 Springboot,Jpa
+## 咸鱼服务端 
+* Springboot
+* Jpa
+* Redis
+* A kind of socket util
+
+## Todo
+* 添加soket chat
+* 完善逻辑
 
 root:/saltedfish/api
 

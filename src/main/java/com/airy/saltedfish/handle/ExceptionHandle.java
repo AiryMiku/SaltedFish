@@ -22,14 +22,8 @@ public class ExceptionHandle {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result handle(Exception e) {
-        if (e instanceof MessageException) {
-            MessageException messageException = (MessageException)e;
-            return ResultUtil.error(messageException.getCode(),messageException.getMessage());
-        } else {
-            LOGGER.error("[system error]{}",e);
-            return ResultUtil.error(-1,"unknow error");
-        }
+        LOGGER.error("[system error]{}",e);
+        return ResultUtil.error(-1,"unknow error");
     }
-
 
 }

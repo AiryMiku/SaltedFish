@@ -1,19 +1,18 @@
 package com.airy.saltedfish.controller;
 
-import com.airy.saltedfish.domain.Comment;
 import com.airy.saltedfish.domain.Message;
 import com.airy.saltedfish.domain.Result;
-import com.airy.saltedfish.properties.CommentRepository;
 import com.airy.saltedfish.properties.MessageRepository;
 import com.airy.saltedfish.service.MessageService;
-import com.airy.saltedfish.utils.DateUtil;
 import com.airy.saltedfish.utils.ResultUtil;
+import com.airy.saltedfish.utils.TokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import java.util.List;
  * Created by Airy on 2017/11/13
  */
 @RestController
-@RequestMapping("/saltedfish/api")
+@RequestMapping("/saltedfish/api/message")
 public class MessageController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MessageController.class);
@@ -32,17 +31,19 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @Autowired
-    private CommentRepository commentRepository;
-
     /**
      * 获取message列表
      * @return
      */
-    @GetMapping(value = "/message")
+    @GetMapping(value = "/")
     public List<Message> getMessageList(){
         LOGGER.info("messageList");
         return messageRepository.findAll();
+    }
+
+    @GetMapping(value = "/user/{id}")
+    public Result getMessagesByUid(@PathVariable(name = "uid")Integer id){
+        return ResultUtil.success(messageRepository.findAllByUser(id));
     }
 
     /**
@@ -51,19 +52,15 @@ public class MessageController {
      * @param bindingResult
      * @return
      */
-    @PostMapping(value = "/message")
-    public Result addMessage(@Valid Message message,
+    @PostMapping(value = "/")
+    public Result addMessage(@RequestHeader String token,@Valid Message message,
                              BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
 
-        message.setNickName(message.getNickName());
-        message.setContent(message.getContent());
-        message.setDisLikeNum(message.getDisLikeNum());
-        message.setLikeNum(message.getLikeNum());
 
-        return ResultUtil.success(messageRepository.save(message));
+        return ResultUtil.error(1,"插入消息错误");
     }
 
     /**
@@ -72,7 +69,7 @@ public class MessageController {
      * @param bindingResult
      * @return
      */
-    @GetMapping(value = "/message/{id}")
+    @GetMapping(value = "/{id}")
     public Result messageFindById(@PathVariable("id") Integer id,
                                   BindingResult bindingResult) {
 
@@ -80,39 +77,15 @@ public class MessageController {
             return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
 
-        List list = messageRepository.findAllById(id);
-        if (list != null){
-            return ResultUtil.success(list);
+        Message message = messageRepository.findById(id);
+        if (message != null){
+            return ResultUtil.success(message);
         } else {
             return ResultUtil.error(1,"Unknow error");
         }
 
     }
 
-    /**
-     * 根据messageId插入一条comment
-     * @param id
-     * @param nickName
-     * @param content
-     * @return
-     */
-    @PostMapping(value = "message/{id}/comment")
-    public Result addOneCommentToMessage(@PathVariable("id") Integer id,
-                                         @RequestParam("nickName") String nickName,
-                                         @RequestParam("content") String content){
 
-
-            Message message = messageService.findOneById(id);
-            Comment comment = new Comment();
-            comment.setNickName(nickName);
-            comment.setContent(content);
-            comment.setDate(DateUtil.getDate());
-            message.addComment(comment);
-            commentRepository.save(comment);
-
-            return ResultUtil.success(messageRepository.save(message));
-
-
-    }
 
 }

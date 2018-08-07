@@ -1,23 +1,18 @@
 package com.airy.saltedfish.service;
 
 import com.airy.saltedfish.domain.User;
-import com.airy.saltedfish.properties.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
- * Created by Airy on 4/2/2018
+ * Created by Airy on 2018/8/7
  */
-@Service
-public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+public interface UserService {
 
-    public boolean vaild(User user){
-        if (userRepository.findUserByUserNameAndPwd(user.getUserName(),user.getPwd()) != null) {
-            return true;
-        }
-        return false;
-    }
+    boolean login(User user);
+
+    User register(User user);
+
+    User update(User user);
+
+    User findById(Integer id);
 }

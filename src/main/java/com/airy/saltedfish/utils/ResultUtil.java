@@ -17,6 +17,13 @@ public class ResultUtil {
         return result;
     }
 
+    public static Result result(String msg){
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg(msg);
+        return result;
+    }
+
     public static Result success(){
         return success(null);
     }

@@ -1,8 +1,7 @@
 package com.airy.saltedfish.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 
 /**
@@ -15,9 +14,12 @@ public class Comment {
     @GeneratedValue
     private Integer id;
 
-    private String nickName;
     private String content;
     private Date date;
+
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     public Integer getId() {
         return id;
@@ -25,14 +27,6 @@ public class Comment {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getContent() {
@@ -51,13 +45,11 @@ public class Comment {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", nickName='" + nickName + '\'' +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                '}';
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

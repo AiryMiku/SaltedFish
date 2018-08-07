@@ -1,6 +1,5 @@
 package com.airy.saltedfish.domain;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 /**
  * Created by Airy on 2017/11/14

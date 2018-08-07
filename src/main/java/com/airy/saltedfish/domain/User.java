@@ -22,6 +22,8 @@ public class User {
     @NotBlank(message = "password must contain")
     private String pwd;
 
+    private String token;
+
     public Integer getId() {
         return Id;
     }

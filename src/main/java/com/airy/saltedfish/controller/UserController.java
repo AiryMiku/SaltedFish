@@ -12,13 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 /**
  * Created by Airy on 2017/12/18
  */
 @RestController
-@RequestMapping("/saltedfish/api")
+@RequestMapping("/saltedfish/api/user")
 public class UserController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MessageController.class);
@@ -29,11 +28,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/user/find")
-    public User getUserByUserName(@RequestBody Map<String,Object> reqMap){
-        String name = reqMap.get("name").toString();
-        LOGGER.info("messageList");
-        return userRepository.findByUserName(name);
+    /**
+     * 通过id返回用户信息
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/find/{id}")
+    public Result getUserByUserName(@PathVariable("id") Integer id){
+        return ResultUtil.success(userService.findById(id));
     }
 
     /***
@@ -42,7 +44,7 @@ public class UserController {
      * @param bindingResult
      * @return
      */
-    @PostMapping(value = "/user/register")
+    @PostMapping(value = "/register")
     @ResponseBody
     public Result register(@Valid User user, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
@@ -51,10 +53,8 @@ public class UserController {
         if (userRepository.findByUserName(user.getUserName()) !=null) {
             return ResultUtil.error(1,"User is exist");
         }
-        user.setUserName(user.getUserName());
-        user.setPwd(user.getPwd());
 
-        return ResultUtil.success(userRepository.save(user));
+        return ResultUtil.success(userService.register(user));
     }
 
     /***
@@ -63,12 +63,12 @@ public class UserController {
      * @param bindingResult
      * @return
      */
-    @PostMapping(value = "/user/login")
+    @PostMapping(value = "/login")
     public Result login(@Valid User user,BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
-        if (userService.vaild(user)) {
+        if (userService.login(user)) {
             return ResultUtil.success();
         }
         return ResultUtil.error(1,"wrongPwd or userName");
