@@ -2,8 +2,7 @@ package com.airy.saltedfish.domain;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -24,14 +23,18 @@ public class Page {
 //    private List<Image> niceImage;
 
     @OneToMany
-    @JoinColumn(name = "messageId")
-    private Set<Comment> comments = new HashSet<>();
+    @JoinColumn(name = "pageId")
+    private List<Comment> comments;
 
     @OneToOne
     @JoinColumn(name = "blockId")
     private Block block;
 
-    private String publishDate;
+    private Date publishDate;
+
+    public Page(){
+        comments = new ArrayList<>();
+    }
 
     public Integer getId() {
         return Id;
@@ -57,19 +60,19 @@ public class Page {
         this.block = block;
     }
 
-    public String getPublishDate() {
+    public Date getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(String publishDate) {
+    public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

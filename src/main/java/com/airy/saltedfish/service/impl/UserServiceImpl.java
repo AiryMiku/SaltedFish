@@ -3,6 +3,7 @@ package com.airy.saltedfish.service.impl;
 import com.airy.saltedfish.domain.User;
 import com.airy.saltedfish.properties.UserRepository;
 import com.airy.saltedfish.service.UserService;
+import com.airy.saltedfish.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User register(User user) {
+        user.setCreateDate(DateUtil.getDate());
         return userRepository.save(user);
     }
 

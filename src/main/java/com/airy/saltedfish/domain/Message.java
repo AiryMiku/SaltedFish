@@ -3,8 +3,7 @@ package com.airy.saltedfish.domain;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Airy on 2017/11/13
@@ -29,9 +28,21 @@ public class Message {
 
     @OneToMany
     @JoinColumn(name = "messageId")
-    private Set<Comment> comments = new HashSet<>();
+    private List<Comment> comments;
 
-    public Message(){}
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Message(){
+        comments = new ArrayList<>();
+    }
 
     public Integer getId() {
         return id;
@@ -70,11 +81,11 @@ public class Message {
         comments.add(comment);
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

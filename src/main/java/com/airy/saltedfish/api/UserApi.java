@@ -1,4 +1,4 @@
-package com.airy.saltedfish.controller;
+package com.airy.saltedfish.api;
 
 import com.airy.saltedfish.domain.Result;
 import com.airy.saltedfish.domain.User;
@@ -18,9 +18,9 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/saltedfish/api/user")
-public class UserController {
+public class UserApi {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(MessageController.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserApi.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -53,7 +53,6 @@ public class UserController {
         if (userRepository.findByUserName(user.getUserName()) !=null) {
             return ResultUtil.error(1,"User is exist");
         }
-
         return ResultUtil.success(userService.register(user));
     }
 

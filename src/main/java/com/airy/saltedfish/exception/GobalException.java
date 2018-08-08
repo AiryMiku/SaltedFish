@@ -6,12 +6,12 @@ import com.airy.saltedfish.enums.ResultEnum;
  * Created by Airy on 2017/11/14
  */
 
-public class MessageException extends RuntimeException {
+public class GobalException extends RuntimeException {
     //spring只对re进行事务回滚
 
     private Integer code;
 
-    public MessageException(ResultEnum resultEnum) {
+    public GobalException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
     }

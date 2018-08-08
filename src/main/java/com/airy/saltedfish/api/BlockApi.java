@@ -1,4 +1,4 @@
-package com.airy.saltedfish.controller;
+package com.airy.saltedfish.api;
 
 import com.airy.saltedfish.domain.Block;
 import com.airy.saltedfish.domain.Result;
@@ -9,16 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Id;
-
 /**
  * Created by Airy on 2018/8/7
  */
 @RestController
 @RequestMapping("/saltedfish/api/block")
-public class BlockController {
+public class BlockApi {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(BlockApi.class);
 
     @Autowired
     private BlockService blockService;

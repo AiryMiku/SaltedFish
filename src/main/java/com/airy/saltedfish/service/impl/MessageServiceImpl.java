@@ -3,6 +3,7 @@ package com.airy.saltedfish.service.impl;
 import com.airy.saltedfish.domain.Message;
 import com.airy.saltedfish.properties.MessageRepository;
 import com.airy.saltedfish.service.MessageService;
+import com.airy.saltedfish.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,22 +31,23 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message findById(Integer id) {
-        return null;
+        return messageRepository.findById(id);
     }
 
     @Override
     public Message add(Message message) {
-        return null;
+        message.setDate(DateUtil.getDate());
+        return messageRepository.save(message);
     }
 
     @Override
     public void delete(Integer id) {
-
+        messageRepository.delete(id);
     }
 
     @Override
     public Message update(Message message) {
-        return null;
+        return messageRepository.save(message);
     }
 
     public Message findOneById(Integer id) {

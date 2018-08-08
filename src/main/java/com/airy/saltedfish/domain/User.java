@@ -5,8 +5,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
+ * 用户的信息
+ *
  * Created by Airy on 2017/11/29
  */
 @Entity
@@ -23,6 +26,16 @@ public class User {
     private String pwd;
 
     private String token;
+
+    private Date createDate;
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public Integer getId() {
         return Id;

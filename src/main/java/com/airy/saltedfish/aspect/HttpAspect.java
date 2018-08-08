@@ -19,7 +19,7 @@ public class HttpAspect {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(HttpAspect.class);
 
-    @Pointcut("execution(public * com.airy.saltedfish.controller.MessageController.*(..))")
+    @Pointcut("execution(public * com.airy.saltedfish.api.MessageApi.*(..))")
     public void log(){
     }
 

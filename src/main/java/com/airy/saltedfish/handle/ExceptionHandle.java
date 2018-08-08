@@ -1,7 +1,6 @@
 package com.airy.saltedfish.handle;
 
 import com.airy.saltedfish.domain.Result;
-import com.airy.saltedfish.exception.MessageException;
 import com.airy.saltedfish.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

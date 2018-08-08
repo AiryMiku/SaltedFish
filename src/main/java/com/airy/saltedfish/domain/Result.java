@@ -2,6 +2,8 @@ package com.airy.saltedfish.domain;
 
 
 /**
+ * 返回结果的实体
+ *
  * Created by Airy on 2017/11/14
  */
 
