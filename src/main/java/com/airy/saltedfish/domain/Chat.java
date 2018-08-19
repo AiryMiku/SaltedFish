@@ -7,7 +7,7 @@ import javax.persistence.Id;
 /**
  * Created by Airy on 2018/8/7
  */
-@Entity
+//@Entity
 public class Chat {
 
     @Id
