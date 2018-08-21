@@ -1,6 +1,6 @@
 package com.airy.saltedfish.socket;
 
-import com.airy.saltedfish.domain.Message;
+
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
