@@ -4,8 +4,11 @@ import com.airy.saltedfish.domain.User;
 import com.airy.saltedfish.properties.UserRepository;
 import com.airy.saltedfish.service.UserService;
 import com.airy.saltedfish.utils.DateUtil;
+import com.airy.saltedfish.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Airy on 4/2/2018
@@ -26,7 +29,14 @@ public class UserServiceImpl implements UserService {
 
     public User register(User user) {
         user.setCreateDate(DateUtil.getDate());
-        return userRepository.save(user);
+        userRepository.save(user);
+        try {
+            user.setToken(TokenUtil.createToken(user.getId()));
+            return userRepository.save(user);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
